@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import MainLayout from "./layouts/MainLayout";
+
 import Home from "./pages/Landing/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -11,29 +13,37 @@ import NotFound from "./pages/NotFound/NotFound";
 function App() {
   return (
     <BrowserRouter>
+
       <Routes>
 
-        <Route path="/" element={<Home />} />
-
+        {/* Routes WITHOUT Navbar/Footer */}
         <Route path="/login" element={<Login />} />
-
         <Route path="/register" element={<Register />} />
 
-        <Route path="/marketplace" element={<Marketplace />} />
+        {/* Routes WITH Navbar/Footer */}
+        <Route element={<MainLayout />}>
 
-        <Route
-          path="/farmer/dashboard"
-          element={<FarmerDashboard />}
-        />
+          <Route path="/" element={<Home />} />
 
-        <Route
-          path="/buyer/dashboard"
-          element={<BuyerDashboard />}
-        />
+          <Route path="/marketplace" element={<Marketplace />} />
 
+          <Route
+            path="/buyer/dashboard"
+            element={<BuyerDashboard />}
+          />
+
+          <Route
+            path="/farmer/dashboard"
+            element={<FarmerDashboard />}
+          />
+
+        </Route>
+
+        {/* 404 */}
         <Route path="*" element={<NotFound />} />
 
       </Routes>
+
     </BrowserRouter>
   );
 }

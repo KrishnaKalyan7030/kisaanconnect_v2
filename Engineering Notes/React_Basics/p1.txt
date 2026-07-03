@@ -1,0 +1,68 @@
+React is a frontend library which makes use of vite tool to build application on top of it.
+React is also called  SPA(Single Page Application) because it does not reload page while rendering any component.Only content is changed but no page is reloded.
+
+
+Flow
+
+Browser
+|
+index.html
+|
+main.jsx (Entry point of react application)
+|
+App.jsx   (App.jsx is the root component.Everything in the application starts from here)
+|
+<App> main component  {Only the required component changes instead of reloading the whole page.}
+|
+BrowserRouter
+|
+Routers
+|
+route
+
+
+
+===========================================
+Layout
+
+Problem:
+
+Navbar and Footer were duplicated across many HTML pages.
+
+Solution:
+
+Create a shared MainLayout.
+Render common UI once.
+Use <Outlet /> to display the current page.
+
+Flow:
+
+Browser
+   ↓
+App
+   ↓
+MainLayout
+   ├── Navbar
+   ├── Outlet (current page)
+   └── Footer
+
+   ================================
+
+   Nested Routes
+
+Why?
+
+Some pages share a common layout (Navbar/Footer).
+Others (Login/Register) should not.
+
+Solution:
+
+Group routes under a layout using nested routes.
+Render child pages with <Outlet />.
+
+Flow:
+
+MainLayout
+   ├── Navbar
+   ├── Outlet → Current Page
+   └── Footer
