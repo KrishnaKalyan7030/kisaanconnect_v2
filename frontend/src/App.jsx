@@ -3,11 +3,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 
 import Home from "./pages/Landing/Home";
+
+
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+
 import Marketplace from "./pages/Marketplace/Marketplace";
+
 import FarmerDashboard from "./pages/Farmer/Dashboard";
+import AddProduct from "./pages/Farmer/AddProduct";
+import MyProducts from "./pages/Farmer/MyProducts";
+
 import BuyerDashboard from "./pages/Buyer/Dashboard";
+
+import Profile from "./pages/Profile/Profile";
+
 import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
@@ -37,7 +47,28 @@ function App() {
             element={<FarmerDashboard />}
           />
 
+          <Route
+          path="/addproduct"
+          element={<AddProduct/>}
+          />
+
+         <Route
+         path="myproducts"
+         element={<MyProducts/>}
+         />
+
+
+
+          <Route
+         path="profile"
+         element={<Profile/>}
+         />
         </Route>
+
+         {/* <Route
+         path="home"
+         element={<Home/>}
+         /> */}
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />

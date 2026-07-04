@@ -1,14 +1,9 @@
 function Footer() {
   return (
-    <footer
-      style={{
-        padding: "20px",
-        background: "#1f2937",
-        color: "white",
-        textAlign: "center",
-      }}
-    >
+    <footer className="bg-gray-900 text-white text-center p-6">
+
       © 2026 KisaanConnect
+
     </footer>
   );
 }
