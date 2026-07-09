@@ -1,71 +1,78 @@
 import { useState } from "react";
 import InputField from "../../components/UI/InputField";
 
+const INITIAL_ERRORS = {
+  email: "",
+  password: "",
+};
+
 function Login() {
-  // State
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors,setErrors]=useState({
-    email: "",
-  password: "",
-  });
+  const [errors, setErrors] = useState(INITIAL_ERRORS);
 
+  
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
 
-const handleEmailChange = (e) => {
-  setEmail(e.target.value);
-
-  setErrors((prev) => ({
-    ...prev,
-    email: "",
-  }));
-};
-
-const handlePasswordChange = (e) => {
-  setPassword(e.target.value);
-
-  setErrors((prev) => ({
-    ...prev,
-    password: "",
-  }));
-};
-
-  const validateForm = () => {
-  const newErrors = {
-    email: "",
-    password: "",
+    setErrors((prev) => ({
+      ...prev,
+      email: "",
+    }));
   };
 
-  if (email.trim() === "") {
-    newErrors.email = "Email is required";
-  }
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
 
-  if (password.trim() === "") {
-    newErrors.password = "Password is required";
-  }
+    setErrors((prev) => ({
+      ...prev,
+      password: "",
+    }));
+  };
 
-  setErrors(newErrors);
+ 
+  const validateForm = () => {
+    const newErrors = { ...INITIAL_ERRORS };
 
-  return (
-    newErrors.email === "" &&
-    newErrors.password === ""
-  );
-};
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    }
 
-  // Form Submit
- const handleSubmit = (e) => {
-  e.preventDefault();
+    if (!password.trim()) {
+      newErrors.password = "Password is required";
+    }
 
-  if (!validateForm()) {
-    return;
-  }
+    setErrors(newErrors);
 
-  console.log(email);
-  console.log(password);
+    return (
+      newErrors.email === "" &&
+      newErrors.password === ""
+    );
+  };
 
-  // Tomorrow:
-  // await loginUser(email, password)
-};
+  // ==========================
+  // Submit
+  // ==========================
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    if (!validateForm()) {
+      return;
+    }
+
+    console.log({
+      email,
+      password,
+    });
+
+    // Next Sprint:
+    // await loginUser(email, password);
+  };
+
+  // ==========================
+  // JSX
+  // ==========================
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
@@ -82,14 +89,8 @@ const handlePasswordChange = (e) => {
             placeholder="Enter your email"
             value={email}
             onChange={handleEmailChange}
-        
+            error={errors.email}
           />
-
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.email}
-              </p>
-            )}
 
           <InputField
             label="Password"
@@ -97,16 +98,8 @@ const handlePasswordChange = (e) => {
             placeholder="Enter your password"
             value={password}
             onChange={handlePasswordChange}
+            error={errors.password}
           />
-
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.password}
-              </p>
-            )}
-
-
-         
 
           <button
             type="submit"
@@ -117,8 +110,8 @@ const handlePasswordChange = (e) => {
 
         </form>
 
-        {/* Only for learning. We'll remove this later */}
-        <div className="mt-6 rounded bg-gray-100 p-4">
+        {/* Debug Section (Remove before production) */}
+        <div className="mt-6 rounded-lg bg-gray-100 p-4">
           <p>
             <strong>Email:</strong> {email}
           </p>
