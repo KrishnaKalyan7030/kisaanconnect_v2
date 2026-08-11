@@ -9,9 +9,9 @@
 # psycopg2-binary   # for PostgreSQL later (safe to keep even for SQLite)
 
 
-fastapi==0.109.0
+fastapi>=0.115.0
 uvicorn[standard]==0.27.0
-pydantic==2.5.3
+pydantic>=2.5.3
 pydantic-settings==2.1.0
 python-dotenv==1.0.0
 python-jose[cryptography]==3.3.0
@@ -22,3 +22,4 @@ psycopg2-binary==2.9.9
 python-multipart==0.0.6
 email-validator==2.1.0
 cloudinary==1.40.0
+starlette>=0.38.0
