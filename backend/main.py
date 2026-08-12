@@ -27,7 +27,7 @@ app = FastAPI(
 ALLOWED_ORIGINS = [
     "http://localhost:5173",   # Vite dev server (npm run dev)
     "http://127.0.0.1:5173",
-    # "https://your-deployed-frontend.vercel.app",  # ← add after deploying
+    "https://kisaanconnect-v2.vercel.app" #deployed link
 ]
 
 app.add_middleware(

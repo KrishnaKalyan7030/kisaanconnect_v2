@@ -1,8 +1,8 @@
 // src/api/client.js
 // KisaanConnect — API client (ported from frontend/js/api.js)
 
-export const BASE_URL = "http://127.0.0.1:8000";
-// export const BASE_URL = "https://kisaanconnect-backend.onrender.com"; // ← uncomment for prod
+// export const BASE_URL = "https://kisaanconnect-v2.vercel.app/";
+export const BASE_URL = "https://kisaanconnect-v2-backend.onrender.com"; // ← uncomment for prod
 
 // The backend returns image_url as a relative path like "/uploads/xxx.jpg".
 // Prefix it with BASE_URL so <img> tags load from the FastAPI server instead
