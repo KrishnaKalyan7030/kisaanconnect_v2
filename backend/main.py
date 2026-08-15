@@ -24,8 +24,9 @@ app = FastAPI(
 # allow_credentials=True requires an explicit origin list — "*" is not
 # permitted alongside it. Add your deployed frontend's real URL here once
 # it's live.
+
 ALLOWED_ORIGINS = [
-    "http://localhost:5173",   # Vite dev server (npm run dev)
+    "http://localhost:5173",   
     "http://127.0.0.1:5173",
     "https://kisaanconnect-v2.vercel.app" #deployed link
 ]
