@@ -1,14 +1,3 @@
-# fastapi
-# uvicorn[standard]
-# pydantic-settings
-# python-dotenv
-# python-jose[cryptography]
-# passlib[bcrypt]
-# sqlalchemy
-# alembic
-# psycopg2-binary   # for PostgreSQL later (safe to keep even for SQLite)
-
-
 fastapi>=0.115.0
 uvicorn[standard]==0.27.0
 pydantic>=2.5.3

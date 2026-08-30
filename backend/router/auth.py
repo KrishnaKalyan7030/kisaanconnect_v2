@@ -1,40 +1,19 @@
-from fastapi import APIRouter, Request, HTTPException, Depends, Response, status
-# from fastapi.templating import Jinja2Templates
+from fastapi import APIRouter, HTTPException, Depends, Response
 from sqlalchemy.orm import Session
-from jose import JWTError, jwt
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 
 from db.database import get_db
 from models.user import User, UserType
 from schemas.auth import RegisterRequest, TokenResponse
 from utils.security import hash_password, verify_password
 from utils.jwt import create_access_token
+from dependencies.auth import get_current_user
 from core.config import settings
 
 router = APIRouter(
     prefix="/auth",
     tags=["Authentication"]
 )
-
-# templates = Jinja2Templates(directory="frontend")
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
-
-# ====================== HTML ROUTES ======================
-
-# @router.get("/")
-# def home(request: Request):
-#     return templates.TemplateResponse("index.html", {"request": request})
-
-
-# @router.get("/register")
-# def register_page(request: Request):
-#     return templates.TemplateResponse("register.html", {"request": request})
-
-
-# @router.get("/login")
-# def login_page(request: Request):
-#     return templates.TemplateResponse("login.html", {"request": request})
 
 
 # ====================== REGISTER ======================
@@ -134,49 +113,15 @@ async def login_user(
 # ====================== PROTECTED ROUTE ======================
 
 @router.get("/me")
-def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    db: Session = Depends(get_db)
-):
-    try:
-        payload = jwt.decode(
-            token,
-            settings.SECRET_KEY,
-            algorithms=[settings.ALGORITHM]
-        )
-         
-         
-
-        user_id = payload.get("user_id")
-
-
-        if not user_id:
-            raise HTTPException(status_code=401, detail="Invalid token")
-        
-    except jwt.ExpiredSignatureError as e:
-        raise HTTPException(status_code=401, detail="Token has expired")
-        
-    except jwt.InvalidTokenError as e:
-        raise HTTPException(status_code=401, detail=f"Token invalid: {str(e)}")
-        
-    except Exception as e:
-        raise HTTPException(status_code=401, detail="Authentication failed")
-
-    except JWTError:
-        raise HTTPException(status_code=401, detail="Token invalid or expired")
-
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-
+def get_me(current_user: User = Depends(get_current_user)):
     return {
-        "id": user.id,
-        "name": user.full_name,
-        "email": user.email,
-        "phone": user.phone,
-        "role": user.user_type.value,
-        "village": user.village,
-        "district": user.district,
-        "profile_image_url": user.profile_image_url,
-        "bio": user.bio
+        "id": current_user.id,
+        "name": current_user.full_name,
+        "email": current_user.email,
+        "phone": current_user.phone,
+        "role": current_user.user_type.value,
+        "village": current_user.village,
+        "district": current_user.district,
+        "profile_image_url": current_user.profile_image_url,
+        "bio": current_user.bio
     }

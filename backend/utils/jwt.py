@@ -35,16 +35,12 @@ def decode_access_token(token: str):
             algorithms=[settings.ALGORITHM]
         )
 
-        print("Decoded payload:", payload)
-
-        email: str = payload.get('sub')   # ✅ FIXED
+        email: str = payload.get('sub')
 
         if email is None:
             return None
 
         return payload
 
-    except JWTError as e:
-        print("JWT ERROR:", e)
+    except JWTError:
         return None
-        
