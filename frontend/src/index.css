@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-bg {
+  background: linear-gradient(rgba(22,101,52,0.82), rgba(22,101,52,0.88)),
+              url('https://picsum.photos/id/1015/1920/1080') center/cover no-repeat;
+  background-attachment: fixed;
+}
+
+.login-bg {
+  background: linear-gradient(rgba(22,101,52,0.85), rgba(22,101,52,0.9)),
+              url('https://picsum.photos/id/1015/1920/1080') center/cover;
+}
+
+.register-bg {
+  background: linear-gradient(rgba(22,101,52,0.88), rgba(22,101,52,0.92)),
+              url('https://picsum.photos/id/1015/1920/1080') center/cover;
+}
+
+.product-card {
+  transition: all 0.3s ease;
+}
+.product-card:active {
+  transform: scale(0.97);
+}
+
+.card {
+  transition: all 0.3s ease;
+}
+.card:active {
+  transform: scale(0.97);
+}
