@@ -15,7 +15,7 @@ class ProductInterest(Base):
     __tablename__ = "product_interests"
 
     id = Column(Integer, primary_key=True, index=True)
-    product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
+    product_id = Column(Integer, ForeignKey("products.id",ondelete="CASCADE"), nullable=False)
     buyer_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     status = Column(SQLEnum(InterestStatus, name="interest_status_enum"), default=InterestStatus.pending, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
